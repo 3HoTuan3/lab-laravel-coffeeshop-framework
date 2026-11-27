@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiTokenManagerController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomepageController;
@@ -21,4 +22,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/api-tokens', [ApiTokenManagerController::class, 'index'])->name('apiTokens.index');
 });
