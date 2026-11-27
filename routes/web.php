@@ -4,6 +4,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\OrderCompleteController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomepageController::class, 'index'])->name('homepage');
@@ -16,4 +17,8 @@ Route::get('/checkout/{order}', [CheckoutController::class, 'show'])->name('chec
 
 Route::get('/order-complete/{order}', OrderCompleteController::class)->name('orders.complete');
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
