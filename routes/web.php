@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\OrderCompleteController;
 use Illuminate\Support\Facades\Route;
@@ -14,3 +15,5 @@ Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.s
 Route::get('/checkout/{order}', [CheckoutController::class, 'show'])->name('checkout.show');
 
 Route::get('/order-complete/{order}', OrderCompleteController::class)->name('orders.complete');
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
